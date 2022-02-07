@@ -12,11 +12,13 @@ const data = [];
 const process = (raw) => {
   return raw.map((element) => {
     return {
-      ...element,
+      share: element.share,
+      compnay: element.company,
+      price: element.price,
+      lastYearDivident: element.dividendHistory[0].dividend,
       yield: getDivYield(element),
       average: getAvgDiv(element),
       weightedAverage: getWeightAvgDiv(element),
-      lastYearYield: element.dividendHistory[0].dividend,
     };
   });
 };
@@ -24,8 +26,18 @@ const process = (raw) => {
 const saveAndPrint = (content) => {
   for (let share of content) {
     data.push(share);
-    console.log(share);
   }
+  console.log(data);
+};
+
+const createFile = () => {
+  const jsn = JSON.stringify(data);
+  const blob = new Blob([jsn], { type: "application/json" });
+  const a = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  a.setAttribute("href", url);
+  a.setAttribute("download", "simple_shares.json");
+  a.click(); // Start downloading
 };
 
 fetch(
@@ -34,6 +46,7 @@ fetch(
   .then((response) => response.json())
   .then((body) => process(body))
   .then((proData) => saveAndPrint(proData))
+  .then(() => createFile())
   .catch((err) => console.error(err));
 
 const getDivYield = (share) => {
