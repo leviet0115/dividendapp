@@ -1,6 +1,6 @@
-**This is an ongoing school assignment.
+*This is an ongoing school assignment.
 
-**My learning note for git version controlling:
+*My learning note for git version controlling:
 
 - Leave a branch open for an as shortest period as possible. Delete the branch when no change making is needed.
 
@@ -8,6 +8,6 @@
 
 - Good practice: pull frequently to keep oneself up-to-date with changes + make and push fast changes
 
-**Progress:
+*Progress:
 
 Working on the advance functions
